@@ -1,8 +1,13 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
+	"os"
+)
 
 func main() {
+	_ = godotenv.Load()
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
@@ -11,5 +16,5 @@ func main() {
 		})
 	})
 
-	_ = app.Listen(":8000")
+	_ = app.Listen(":" + os.Getenv("SERVER_PORT"))
 }
